@@ -5,3 +5,5 @@ I try to use TDD approach to develop a shopping process.
 - use swagger to documentation about services
 - use REST services
 - write test case for REST API
+- postgresql for database
+- spring data jpa
