@@ -1,4 +1,4 @@
-package com.altavik.model.entity;
+package com.atlavik.model.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;

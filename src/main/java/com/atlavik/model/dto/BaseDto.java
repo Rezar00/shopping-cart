@@ -1,4 +1,4 @@
-package com.altavik.model.dto;
+package com.atlavik.model.dto;
 
 import lombok.Data;
 

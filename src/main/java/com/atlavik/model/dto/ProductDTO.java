@@ -1,14 +1,15 @@
-package com.altavik.model.dto;
+package com.atlavik.model.dto;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ProductDTO extends BaseDto{
 
 

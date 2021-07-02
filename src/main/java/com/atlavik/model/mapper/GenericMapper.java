@@ -1,4 +1,4 @@
-package com.altavik.model.mapper;
+package com.atlavik.model.mapper;
 
 import java.util.List;
 

@@ -1,6 +1,8 @@
-package com.altavik.model.entity;
+package com.atlavik.model.entity;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -9,9 +11,7 @@ import java.util.Set;
 @Table(name = "shopping_cart")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@EqualsAndHashCode(callSuper = true, exclude = {"products"})
 public class ShoppingCart extends BaseEntity {
 
     @Column

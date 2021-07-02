@@ -1,4 +1,4 @@
-package com.altavik.config;
+package com.atlavik.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -26,7 +26,7 @@ public class SwaggerConfig {
     public Docket apiAuth() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.altavik.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.atlavik.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(metaData())
