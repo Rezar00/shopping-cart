@@ -6,7 +6,6 @@ import com.atlavik.model.service.ShoppingCartService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,17 +28,40 @@ public class ShoppingCartController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping
-    @ApiOperation(value = "add shopping cart", notes = "this api can add a shopping cart")
-    public ResponseEntity<Void> add(@RequestBody ShoppingCartDTO dto) {
-        this.shoppingCartService.addShoppingCart(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    @GetMapping(value = "/{id}")
+    @ApiOperation(value = "get shopping cart by id", notes = "with this api, you can see a shopping cat by given id")
+    public ResponseEntity<ShoppingCartDTO> getOne(@PathVariable Long id) {
+        ShoppingCartDTO response = this.shoppingCartService.getOne(id);
+        return ResponseEntity.ok(response);
     }
 
-    @PostMapping(value = "/{cartId}/products")
+    @PostMapping
+    @ApiOperation(value = "add shopping cart", notes = "this api can add a shopping cart")
+    public ResponseEntity<ShoppingCartDTO> add(@RequestBody ShoppingCartDTO dto) {
+        ShoppingCartDTO response = this.shoppingCartService.addShoppingCart(dto);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping(value = "/{cartId}/products")
     @ApiOperation(value = "get products belong to a cart id", notes = "this api can list all products that belongs to given cart id")
     public ResponseEntity<List<ProductDTO>> getAllProductsForGivenCartId(@PathVariable(name = "cartId") Long cartId) {
         List<ProductDTO> response = this.shoppingCartService.getAllProductsForGivenCartId(cartId);
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping(value = "/{cartId}/products")
+    @ApiOperation(value = "get products belong to a cart id", notes = "this api can list all products that belongs to given cart id")
+    public ResponseEntity<ProductDTO> getAllProductsForGivenCartId(@PathVariable(name = "cartId") Long cartId,
+                                                                   @RequestBody ProductDTO productDTO) {
+        ProductDTO response = this.shoppingCartService.updateProductByGivenCart(cartId, productDTO);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping(value = "/{cartId}/products/{productId}")
+    @ApiOperation(value = "get products belong to a cart id", notes = "this api can list all products that belongs to given cart id")
+    public ResponseEntity<Void> getAllProductsForGivenCartId(@PathVariable Long cartId,
+                                                             @PathVariable Long productId) {
+        this.shoppingCartService.deleteProductByGivenCartIdAndProductId(cartId, productId);
+        return ResponseEntity.noContent().build();
     }
 }

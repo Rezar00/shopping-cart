@@ -69,26 +69,36 @@ public class ShoppingCartIntegrationTest {
         assertEquals(HttpStatus.CREATED.value(), postResponse.getStatusCode().value(), "OK");
     }
 
-    @Test
-    public void update() {
-        int id = 1;
-        ShoppingCartDTO shoppingCartDTO = restTemplate.getForObject(getRootUrl() + "/carts/" + id, ShoppingCartDTO.class);
-        shoppingCartDTO.setCurrency("USD");
-        restTemplate.put(getRootUrl() + "/shared-model", shoppingCartDTO);
-        ShoppingCartDTO updatedShoppingCart = restTemplate.getForObject(getRootUrl() + "/carts/" + id, ShoppingCartDTO.class);
-        assertNotNull(updatedShoppingCart);
-    }
-
-    @Test
-    public void delete() {
-        int id = 2;
-        ShoppingCartDTO shoppingCartDTO = restTemplate.getForObject(getRootUrl() + "/carts/" + id, ShoppingCartDTO.class);
-        assertNotNull(shoppingCartDTO);
-        restTemplate.delete(getRootUrl() + "/carts/" + id);
-        try {
-            restTemplate.getForObject(getRootUrl() + "/carts/" + id, ShoppingCartDTO.class);
-        } catch (final HttpClientErrorException e) {
-            assertEquals(e.getStatusCode(), HttpStatus.NOT_FOUND);
-        }
-    }
+//    @Test
+//    public void addProduct() {
+//        int id = 1;
+//        ShoppingCartDTO shoppingCartDTO = restTemplate.getForObject(getRootUrl() + "/carts/" + id, ShoppingCartDTO.class);
+//        shoppingCartDTO.setCurrency("USD");
+//        restTemplate.put(getRootUrl() + "/shared-model", shoppingCartDTO);
+//        ShoppingCartDTO updatedShoppingCart = restTemplate.getForObject(getRootUrl() + "/carts/" + id, ShoppingCartDTO.class);
+//        assertNotNull(updatedShoppingCart);
+//    }
+//
+//    @Test
+//    public void updateProduct() {
+//        int id = 1;
+//        ShoppingCartDTO shoppingCartDTO = restTemplate.getForObject(getRootUrl() + "/carts/" + id, ShoppingCartDTO.class);
+//        shoppingCartDTO.setCurrency("USD");
+//        restTemplate.put(getRootUrl() + "/shared-model", shoppingCartDTO);
+//        ShoppingCartDTO updatedShoppingCart = restTemplate.getForObject(getRootUrl() + "/carts/" + id, ShoppingCartDTO.class);
+//        assertNotNull(updatedShoppingCart);
+//    }
+//
+//    @Test
+//    public void deletePruduct() {
+//        int id = 2;
+//        ShoppingCartDTO shoppingCartDTO = restTemplate.getForObject(getRootUrl() + "/carts/" + id, ShoppingCartDTO.class);
+//        assertNotNull(shoppingCartDTO);
+//        restTemplate.delete(getRootUrl() + "/carts/" + id);
+//        try {
+//            restTemplate.getForObject(getRootUrl() + "/carts/" + id, ShoppingCartDTO.class);
+//        } catch (final HttpClientErrorException e) {
+//            assertEquals(e.getStatusCode(), HttpStatus.NOT_FOUND);
+//        }
+//    }
 }

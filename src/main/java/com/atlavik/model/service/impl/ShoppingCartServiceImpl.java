@@ -1,5 +1,6 @@
 package com.atlavik.model.service.impl;
 
+import com.atlavik.exception.ResourceNotFoundException;
 import com.atlavik.model.dto.ProductDTO;
 import com.atlavik.model.dto.ShoppingCartDTO;
 import com.atlavik.model.entity.ShoppingCart;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -26,6 +28,23 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         this.shoppingCartRepository = shoppingCartRepository;
         this.shoppingCartMapper = shoppingCartMapper;
         this.productService = productService;
+    }
+
+    /**
+     * get a shopping cart by id
+     *
+     * @param id shopping cart id
+     * @return {@link ShoppingCartDTO}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public ShoppingCartDTO getOne(Long id) {
+        Optional<ShoppingCart> cartOptional = this.shoppingCartRepository.findById(id);
+        if (cartOptional.isPresent()) {
+            return this.shoppingCartMapper.entityToModel(cartOptional.get());
+        } else {
+            throw new ResourceNotFoundException("Shopping cart with id: " + id + " not found");
+        }
     }
 
     /**
@@ -60,9 +79,42 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         return this.shoppingCartMapper.entityToModel(this.shoppingCartRepository.save(shoppingCart));
     }
 
+    /**
+     * fetch all products that belongs to a cart
+     *
+     * @param cartId shopping cart id
+     * @return list of {@see ProductDTO}
+     */
     @Override
     @Transactional(readOnly = true)
     public List<ProductDTO> getAllProductsForGivenCartId(Long cartId) {
         return this.productService.getAllByCartId(cartId);
+    }
+
+
+    /**
+     * update a product by product id and shopping cart id
+     *
+     * @param cartId     shopping cart id
+     * @param productDTO product model
+     * @return {@link ProductDTO}
+     */
+    @Override
+    @Transactional
+    public ProductDTO updateProductByGivenCart(Long cartId, ProductDTO productDTO) {
+        return this.productService.updateProduct(productDTO, cartId);
+    }
+
+
+    /**
+     * delete a product by id that belongs to a cart id
+     *
+     * @param cartId    shopping cart id
+     * @param productId product id
+     */
+    @Override
+    @Transactional
+    public void deleteProductByGivenCartIdAndProductId(Long cartId, Long productId) {
+        this.productService.deleteProduct(productId, cartId);
     }
 }

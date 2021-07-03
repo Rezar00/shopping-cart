@@ -14,4 +14,10 @@ public interface ShoppingCartService {
     Page<ShoppingCartDTO> getAll(Pageable pageable);
 
     List<ProductDTO> getAllProductsForGivenCartId(Long cartId);
+
+    ProductDTO updateProductByGivenCart(Long cartId, ProductDTO productDTO);
+
+    void deleteProductByGivenCartIdAndProductId(Long cartId, Long productId);
+
+    ShoppingCartDTO getOne(Long id);
 }
