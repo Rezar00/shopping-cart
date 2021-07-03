@@ -1,0 +1,19 @@
+FROM oracle/jdk:11.0.3
+MAINTAINER  reza roshani <reza.roshani00@gmail.com>
+ENV ENV_NAME local
+ENV BOOTAPP_JAVA_OPTS -Xms256m -Xmx256m
+ENV LOG_PATH "/logs"
+ENV BOOTAPP_USR="root" BOOTAPP_GROUP="root" BOOTAPP_PATH="/shopping_cart.jar"
+ENV SERVER_PORT 9090
+
+EXPOSE $SERVER_PORT
+
+USER root
+COPY maven/shopping_cart.jar $BOOTAPP_PATH
+RUN chmod 555 $BOOTAPP_PATH && \
+            touch $BOOTAPP_PATH
+RUN mkdir $LOG_PATH
+RUN chmod 777 $LOG_PATH && touch $LOG_PATH
+
+USER $BOOTAPP_USR
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/shopping_cart.jar"]

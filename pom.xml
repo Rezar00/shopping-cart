@@ -19,7 +19,7 @@
         <org.mapstruct-processor.version>1.4.1.Final</org.mapstruct-processor.version>
         <org.projectlombok.version>1.18.16</org.projectlombok.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <docker.registry>javatechy</docker.registry>
+        <!--        <docker.registry>shopping</docker.registry>-->
     </properties>
     <dependencies>
         <dependency>
@@ -156,6 +156,54 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>io.fabric8</groupId>-->
+            <!--                <artifactId>docker-maven-plugin</artifactId>-->
+            <!--                <configuration>-->
+            <!--                    <verbose>true</verbose>-->
+            <!--                    <registry>${docker.registry}</registry>-->
+            <!--                    <images>-->
+            <!--                        <image>-->
+            <!--                            <name>${docker.registry}/ip:${project.version}</name>-->
+            <!--                            <build>-->
+            <!--                                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>-->
+            <!--                                <tags>-->
+            <!--                                    <tag>${project.version}</tag>-->
+            <!--                                </tags>-->
+            <!--                                <assembly>-->
+            <!--                                    <inline>-->
+            <!--                                        <dependencySets>-->
+            <!--                                            <dependencySet>-->
+            <!--                                                <includes>-->
+            <!--                                                    <include>${project.groupId}:${project.artifactId}</include>-->
+            <!--                                                </includes>-->
+            <!--                                                <outputFileNameMapping>app.jar</outputFileNameMapping>-->
+            <!--                                            </dependencySet>-->
+            <!--                                        </dependencySets>-->
+            <!--                                    </inline>-->
+            <!--                                </assembly>-->
+            <!--                            </build>-->
+            <!--                        </image>-->
+            <!--                    </images>-->
+            <!--                </configuration>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>build-docker-image</id>-->
+            <!--                        <phase>package</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>build</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                    <execution>-->
+            <!--                        <id>push-docker-image</id>-->
+            <!--                        <phase>deploy</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>push</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+
         </plugins>
     </build>
 
