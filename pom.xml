@@ -19,6 +19,7 @@
         <org.mapstruct-processor.version>1.4.1.Final</org.mapstruct-processor.version>
         <org.projectlombok.version>1.18.16</org.projectlombok.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <docker.registry>javatechy</docker.registry>
     </properties>
     <dependencies>
         <dependency>
