@@ -7,4 +7,5 @@ jobs:
       - image: circleci/openjdk:11-jdk-stretch
     steps:
       - checkout
+      - run: chmod +x ./mvnw
       - run: ./mvnw clean package
